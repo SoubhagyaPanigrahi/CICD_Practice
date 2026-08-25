@@ -27,7 +27,7 @@ pipeline {
                 sh '''
                     docker run --rm \
                     ${IMAGE_NAME}:${BUILD_NUMBER} \
-                    pytest
+                    python -m pytest
                 '''
             }
         }
