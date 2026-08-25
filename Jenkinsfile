@@ -37,7 +37,7 @@ pipeline {
                 sh '''
                     docker run --rm \
                     ${IMAGE_NAME}:${BUILD_NUMBER} \
-                    pylint app.py
+                    pylint app/app.py
                 '''
             }
         }
