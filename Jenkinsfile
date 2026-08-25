@@ -5,6 +5,7 @@ pipeline {
         IMAGE_NAME = 'flask-app'
         CONTAINER_NAME = 'flask-container'
         APP_PORT = '5000'
+	DOCKER_NETWORK = 'cicd-network'
     }
 
     stages {
@@ -50,6 +51,7 @@ pipeline {
 
                     docker run -d \
                     --name ${CONTAINER_NAME} \
+		    --network ${DOCKER_NETWORK} \
                     -p ${APP_PORT}:5000 \
                     ${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
@@ -61,7 +63,7 @@ pipeline {
                 sh '''
                     sleep 5
 
-                    curl --fail http://localhost:${APP_PORT}/
+                    curl --fail http://${CONTAINER_NAME}:${APP_PORT}/health
 
                     echo "Application is healthy!"
                 '''
