@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CI/CD Demo App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 CI/CD Pipeline Demo</h1>
+        <p>Welcome to your automated deployment!</p>
+        <button onclick="fetchMessage()">Test API</button>
+        <button onclick="checkHealth()">Check Health</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        async function fetchMessage() {
+            const response = await fetch('/api/message');
+            const data = await response.json();
+            document.getElementById('response').innerHTML = 
+                `<h3>Message: ${data.message}</h3>`;
+        }
+
+        async function checkHealth() {
+            const response = await fetch('/health');
+            const data = await response.json();
+            document.getElementById('response').innerHTML = 
+                `<h3>Status: ${data.status}</h3><p>Version: ${data.version}</p>`;
+        }
+    </script>
+</body>
+</html>
